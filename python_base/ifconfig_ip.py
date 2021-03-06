@@ -8,13 +8,10 @@ re_findall_result = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}',ipconfig_re
 
 for ip in re_findall_result:
     if ip[-1] == '0':
-        mask = ip
         print('{:>13} : {:<15}'.format('Network Mask',ip))
     elif ip[-3:] == '255':
-        broadcast = ip
         print('{:>13} : {:<15}'.format('Broadcast',ip))
     else:
-        ipv4_ip = ip
         print('{:>13} : {:<15}'.format('Ipv4_Addr',ip))
 
 
