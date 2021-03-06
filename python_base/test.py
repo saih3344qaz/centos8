@@ -1,7 +1,7 @@
 #!/usr/bin/python3.9
 # -*- coding=utf-8 -*-
 
-import datetime
+port = 'eth101/1/20'
+ip = '40.32.1.10/32'
 
-if __name__ == '__main__':
-    pass
+print('端口：%-30s  IP:%-30s'%(port,ip))
