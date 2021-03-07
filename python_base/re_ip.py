@@ -19,4 +19,3 @@ print((f'{ip:<8}: {msg[1]:<10}'))
 print((f'{status:<8}: {msg[2]:<10}'))
 
 
-
