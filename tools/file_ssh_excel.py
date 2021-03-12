@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding=utf-8 -*-
 
-import read_excel_return_dict
-from read_excel_return_dict import excel_parser_return_list
-from write_excel_openpyxl import excel_write
-from write_excel_openpyxl import excel_write_list
+import file_read_excel_return_dict
+from file_read_excel_return_dict import excel_parser_return_list
+from file_write_excel_openpyxl import excel_write
+from file_write_excel_openpyxl import excel_write_list
 from ssh_client_netmiko import netmiko_show_cred, netmiko_config_cred
 import re
 
