@@ -1,4 +1,4 @@
-#!/usr/bin/python3.9
+#!/usr/bin/env python3
 # -*- coding=utf-8 -*-
 # 本脚由孙艳龙编写，用于Python学习及网络自动化脚本，如有问题或技术交流请与本人联系！
 # mail:sunyanlong@bris.cn
