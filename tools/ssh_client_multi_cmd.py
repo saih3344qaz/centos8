@@ -30,4 +30,4 @@ def ssh_client_multi_cmd(ip, username, password, cmd_list, verbose=True):
 
 if __name__ == '__main__':
     # 使用Linux解释器 & WIN解释器
-    ssh_client_multi_cmd('192.168.128.10', 'admin', 'Cisc0123', ['terminal length 0', 'show ver', 'config ter', 'router ospf 1'])
+    ssh_client_multi_cmd('192.168.128.130', 'hillstone', 'hillstone', ['configure', 'address 10.10.10.50/32', 'ip 10.10.10.50/32', 'exit', 'save', 'y', 'y'])
