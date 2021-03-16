@@ -13,13 +13,14 @@ def test_ping(ip):
     ping_pkt = IP(dst=ip)/ICMP()
     ping_result = sr1(ping_pkt,timeout=1,verbose=False)
     if ping_result:
-        return (ip)
+        return ip
     else:
         return
 
 if __name__ == '__main__':
-    result = test_ping('1.1.1.1')
+    add = '192.168.128.1'
+    result = test_ping(add)
     if result != None:
-        print(result,'通!')
+        print(add,'通!')
     else:
-        print('不通!')
+        print(add,'不通!')
