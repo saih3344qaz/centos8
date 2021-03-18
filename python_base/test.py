@@ -1,29 +1,30 @@
 #!/usr/bin/python3
 # -*- coding=utf-8 -*-
 
+from scapy_ping_one_new import test_ping
+from paramiko_ssh import test_ssh
 import re
+import pprint
 
 
-str1 = """TCP Student  192.168.189.167:32806 Teacher  137.78.5.128:65247, idle 0:00:00, bytes 74, flags UIO 
-TCP Student  192.168.189.167:80 Teacher  137.78.5.128:65233, idle 0:00:03, bytes 334516, flags UIO """
+def get_if(*ips, username='admin', password='admin@123'):
+    device_if_dict = {}
+    for ip in ips:
+        host = ip
+        device = test_ping(host)
+        if device != None:
+            port_dict = {}
+            # print('\n', device, '可达')
+            port_info = test_ssh(device, username, password, cmd='show ip int bri')
+            port_info_re = re.search(r'(\w+\d/\d|\w+\d)\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\w+\s*\w+\s+up\s+up',port_info).groups()
+            port_dict[port_info_re[0]] = port_info_re[1]
+            device_if_dict[device] = port_dict
+        else:
+            print(host, '不可达')
+    return device_if_dict
 
 
-list1 = str1.split('\n')
-
-dict1 = {}
-for x in list1:
-    result = re.match(".*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5}).*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5}).*bytes\s+(\d+).*flags\s+(\w*)\s*", x).groups()
-    qyt_key = result[0], result[1], result[2], result[3]
-    qyt_value = result[4], result[5]
-    dict1[qyt_key] = qyt_value
-
-print("\n\n打印字典\n")
-print(dict1)
-
-print("\n\n格式化打印输出\n")
-for key, value in dict1.items():
-    print('%10s : %-20s |%10s : %-10s |%10s : %-10s|%10s : %-10s|' % (
-        "src", key[0], "src_p", key[1], "dst", key[2], "dst_p", key[3]))
-    print('%10s : %-20s |%10s : %-10s' % ('bytes', value[0], 'flags', value[1]))
-    print('=' * 110)
+if __name__ == '__main__':
+    # print(get_if('192.168.128.131', '192.168.128.144'))
+    pprint.pprint(get_if('192.168.128.131', '192.168.128.144'), indent=4)
 
