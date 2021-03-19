@@ -9,12 +9,14 @@ def netmiko_show_cred(host, username, password, cmd, enable='Cisc0123', ssh=True
                     'host': host,
                     'username': username,
                     'password': password,
-                    'device_type': 'cisco_ios' if ssh else 'cisco_ios_telnet',
+                    'device_type': 'cisco_xe' if ssh else 'cisco_ios_telnet',
                     'secret': enable
     }
     try:
         net_connect = Netmiko(**device_info)
-        return net_connect.send_command(cmd)
+        output = net_connect.send_command(cmd)
+        net_connect.disconnect()
+        return output
 
     except Exception as e:
         print(f'connection error ip: {host} error: {str(e)}')
@@ -33,9 +35,11 @@ def netmiko_config_cred(host, username, password, cmds_list, enable='Cisc0123', 
         net_connect = Netmiko(**device_info)
         if verbose:
             output = net_connect.send_config_set(cmds_list)
+            net_connect.disconnect()
             return output
         else:
             net_connect.send_config_set(cmds_list)
+            net_connect.disconnect()
 
     except Exception as e:
         print(f'connection error ip: {host} error: {str(e)}')
@@ -43,12 +47,12 @@ def netmiko_config_cred(host, username, password, cmds_list, enable='Cisc0123', 
 
 
 if __name__ == '__main__':
-    raw_result = netmiko_show_cred('10.1.1.253', 'admin', 'Cisc0123', 'show run')
+    raw_result = netmiko_show_cred('192.168.128.131', 'admin', 'admin@123', 'show run')
     print(type(raw_result))
     print(raw_result)
 
-    config_commands = ['router ospf 1',
-                       'router-id 1.1.1.1',
-                       'network 1.1.1.1 0.0.0.0 a 0']
-
-    print(netmiko_config_cred('10.1.1.253', 'admin', 'Cisc0123', config_commands, verbose=True))
+    # config_commands = ['router ospf 1',
+    #                    'router-id 1.1.1.1',
+    #                    'network 1.1.1.1 0.0.0.0 a 0']
+    #
+    # print(netmiko_config_cred('10.1.1.253', 'admin', 'Cisc0123', config_commands, verbose=True))
