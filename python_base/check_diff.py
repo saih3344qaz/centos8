@@ -40,5 +40,5 @@ def check_diff(host, username, password):
 
 
 if __name__ == '__main__':
-    print(check_diff('192.168.128.145', 'admin', 'admin@123'))
-    # print(get_config('192.168.128.145', 'admin', 'admin@123'))
+    # print(check_diff('192.168.128.145', 'admin', 'admin@123'))
+    print(get_config('192.168.128.145', 'admin', 'admin@123'))

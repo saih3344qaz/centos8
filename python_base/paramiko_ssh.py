@@ -3,7 +3,9 @@
 
 import paramiko
 import re
+from test_decorator import write_to_file
 
+@write_to_file('test.txt')
 def test_ssh(ip, username, password,port=22, cmd='ls'):
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()
@@ -23,7 +25,7 @@ def ssh_get_route(ip, username, password,port=22, cmd='route -n'):
     return x
 
 if __name__ == '__main__':
-    print(test_ssh('192.168.128.160','root','centos@123'))
-    print(test_ssh('192.168.128.160', 'root', 'centos@123',cmd='pwd'))
-    print('网关为：')
-    print(ssh_get_route('192.168.128.160', 'root', 'centos@123'))
+    # print(test_ssh('192.168.128.160','root','centos@123'))
+    print(test_ssh('192.168.128.145', 'admin', 'admin@123',cmd='show run'))
+    # print('网关为：')
+    # print(ssh_get_route('192.168.128.160', 'root', 'centos@123'))
