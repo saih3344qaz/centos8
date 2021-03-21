@@ -29,4 +29,4 @@ def get_if(*ips, username='admin', password='admin@123'):
 
 if __name__ == '__main__':
     # print(get_if('192.168.128.131', '192.168.128.144'))
-    pprint.pprint(get_if('192.168.128.131', '192.168.128.144'), indent=4)
+    pprint.pprint(get_if('192.168.128.131', '192.168.128.145'), indent=4)

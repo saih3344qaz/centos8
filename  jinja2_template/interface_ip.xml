@@ -1,0 +1,17 @@
+<config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ if_type }}>
+        <name>{{ if_no }}</name>
+        <ip>
+          <address>
+            <primary>
+              <address>{{ ip_address}}</address>
+              <mask>{{ net_mask }}</mask>
+            </primary>
+          </address>
+        </ip>
+      </{{ if_type }}>
+    </interface>
+  </native>
+</config>

@@ -1,0 +1,14 @@
+<config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native" xmlns:ios-ospf="http://cisco.com/ns/yang/Cisco-IOS-XE-ospf">
+    <router>
+      <ios-ospf:ospf>
+        <ios-ospf:id>{{ process_id }}</ios-ospf:id>
+        <ios-ospf:network>
+          <ios-ospf:ip>{{ network }}</ios-ospf:ip>
+          <ios-ospf:mask>{{ wild_mask }}</ios-ospf:mask>
+          <ios-ospf:area>{{ area }}</ios-ospf:area>
+        </ios-ospf:network>
+      </ios-ospf:ospf>
+    </router>
+  </native>
+</config>

@@ -1,0 +1,8 @@
+<config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+    <interface>
+      <name>{{ interface_name }}</name>
+      <enabled>{{ interface_status }}</enabled>
+    </interface>
+  </interfaces>
+</config>

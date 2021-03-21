@@ -1,0 +1,7 @@
+<filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <cpu-usage xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-process-cpu-oper">
+    <cpu-utilization>
+      <{{ monitor_type_use }}/>
+    </cpu-utilization>
+  </cpu-usage>
+</filter>

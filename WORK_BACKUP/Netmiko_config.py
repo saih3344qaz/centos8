@@ -5,6 +5,8 @@ from netmiko import ConnectHandler
 from tools.read_excel_todict import read_excel
 import paramiko
 import time
+import threading
+from queue import Queue
 
 
 def paramiko_connect(ip, username, password, verbose=True):
