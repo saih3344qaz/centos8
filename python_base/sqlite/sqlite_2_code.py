@@ -4,8 +4,8 @@
 import sqlite3
 import os
 
-if os.path.exists('./sqlite_dir/qytangcode.sqlite'):
-    os.remove('./sqlite_dir/qytangcode.sqlite')
+if os.path.exists('qytangcode.sqlite'):
+    os.remove('qytangcode.sqlite')
 
 # Python字典对象，我们将把它写入SQLite数据库
 teachers_dict = [{'姓名': '秦柯', '年龄': 37, '部门': '安全', '职位': '讲师'},
@@ -13,7 +13,7 @@ teachers_dict = [{'姓名': '秦柯', '年龄': 37, '部门': '安全', '职位'
                  {'姓名': '周亚军', '年龄': 32, '部门': '路由交换', '职位': '讲师'}]
 
 # 连接SQLite数据库
-conn = sqlite3.connect('./sqlite_dir/qytangcode.sqlite')
+conn = sqlite3.connect('qytangcode.sqlite')
 cursor = conn.cursor()
 
 # 执行创建表的任务
