@@ -4,6 +4,7 @@
 import logging
 
 from kamene.layers.inet import ICMP, IP
+
 logging.getLogger("kamene.runtime").setLevel(logging.ERROR)
 from kamene.all import *
 
@@ -31,7 +32,7 @@ class Qytping:
             print(self.ip, '不可达！')
 
     def ping(self):
-        for i in range(100):
+        for i in range(5):
             result = sr1(self.pkt, timeout=1, verbose=False)
             if result:
                 print('!', end='', flush=True)
@@ -48,7 +49,7 @@ class Qytping:
 
 class Newping(Qytping):
     def ping(self):
-        for i in range(100):
+        for i in range(5):
             result = sr1(self.pkt, timeout=1, verbose=False)
             if result:
                 print('+', end='', flush=True)
@@ -58,10 +59,30 @@ class Newping(Qytping):
 
 
 if __name__ == '__main__':
-    ping = Qytping('192.168.128.145')
-    ping2 = Newping('www.baidu.com')
-    # ping.size(200)
-    # ping.src('192.168.128.160')
-    # ping.ping()
-    ping2.ping()
+    ping = Qytping('192.168.128.1')
+    total_len = 70
 
+
+    def print_new(word, s='_'):
+        print('{0}{1}{2}'.format(s * int((70 - len(word)) / 2), word, s * int((70 - len(word)) / 2)))
+
+
+    print_new('print class')
+    print(ping)
+    print_new('ping one for sure reachable')
+    ping.one()
+    print_new('ping five')
+    ping.ping()
+    print_new('set payload lenth')
+    ping.length = 200
+    print(ping)
+    ping.ping()
+    print_new('set ping src ip address')
+    ping.srcip = '192.168.128.20'
+    print(ping)
+    ping.ping()
+    print_new('new class NewPing', '=')
+    newping = Newping('172.16.200.99')
+    newping.length = 300
+    print(newping)
+    newping.ping()
