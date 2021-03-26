@@ -31,7 +31,7 @@ def create_sadd(excelfile):  # 创建源地址模块
             if re.search(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d)[/][2][4]', y):
                 sadd_1 = 'edit ' + str(y)
                 sadd_2 = 'set subnet ' + \
-                    str(y).rstrip('/24') + ' 255.255.255.0'
+                         str(y).rstrip('/24') + ' 255.255.255.0'
                 sadd_3 = 'next'
                 sadd_cmd.extend((sadd_1, sadd_2, sadd_3))
             elif re.search(r'\d{1,3}\.\d{1,3}\.[0]\.[0][/][1][6]', y):
@@ -44,7 +44,7 @@ def create_sadd(excelfile):  # 创建源地址模块
                 range_list1 = re.split(r'[-]', y)
                 sadd_1 = 'edit ' + str(range_list[0]) + '.' + str(range_list[1]) + '.' + str(
                     range_list[2]) + '.' + '[' + str(range_list[3]) + '-' + str(range_list[4]) + ']'
-                sadd_2 = 'set rype iprange'
+                sadd_2 = 'set type iprange'
                 sadd_3 = 'set start-ip ' + str(range_list1[0])
                 sadd_4 = 'set end-ip ' + str(range_list[0]) + '.' + str(
                     range_list[1]) + '.' + str(range_list[2]) + '.' + str(range_list[4])
@@ -70,13 +70,13 @@ def create_dadd(excelfile):  # 创建目的地址模块
             if re.search(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d)[/][2][4]', y):
                 dadd_name = 'edit ' + str(y)
                 dadd_add = 'set subnet ' + \
-                    str(y).rstrip('/24') + ' 255.255.255.0'
+                           str(y).rstrip('/24') + ' 255.255.255.0'
                 dadd_exit = 'next'
                 dadd_cmd.extend((dadd_name, dadd_add, dadd_exit))
             elif re.search(r'\d{1,3}\.\d{1,3}\.[0]\.[0][/][1][6]', y):
                 dadd_name = 'edit ' + str(y)
                 dadd_add = 'set subnet ' + \
-                    str(y).rstrip('/16') + ' 255.255.0.0'
+                           str(y).rstrip('/16') + ' 255.255.0.0'
                 dadd_exit = 'next'
                 dadd_cmd.extend((dadd_name, dadd_add, dadd_exit))
             elif re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}[-]\d{1,3}', y):
@@ -84,7 +84,7 @@ def create_dadd(excelfile):  # 创建目的地址模块
                 range_list1 = re.split(r'[-]', y)
                 dadd_1 = 'edit ' + str(range_list[0]) + '.' + str(range_list[1]) + '.' + str(
                     range_list[2]) + '.' + '[' + str(range_list[3]) + '-' + str(range_list[4]) + ']'
-                dadd_2 = 'set rype iprange'
+                dadd_2 = 'set type iprange'
                 dadd_3 = 'set start-ip ' + str(range_list1[0])
                 dadd_4 = 'set end-ip ' + str(range_list[0]) + '.' + str(
                     range_list[1]) + '.' + str(range_list[2]) + '.' + str(range_list[4])
@@ -134,6 +134,8 @@ def create_policy(excelfile):  # 创建策略模块
         src_add = ['set srcaddr ']
         dst_add = ['set dstaddr ']
         ser = ['set service ']
+        scherule = 'set schedule always'
+        status = 'set status enable'
         next = 'next'
         x2 = x[2]
         src_list = x2.split(' ')
@@ -175,14 +177,8 @@ def create_policy(excelfile):  # 创建策略模块
         for z in ser_list:
             z1 = str(x[5]).upper() + z
             ser.append(z1)
-        policy_cmd.extend(
-            (number,
-             src_zone,
-             dst_zone,
-             (' '.join(src_add)),
-                (' '.join(dst_add)),
-                (' '.join(ser)),
-                next))
+        policy_cmd.extend((number, src_zone, dst_zone, (' '.join(src_add)), (' '.join(dst_add)), (' '.join(ser)),
+                           scherule, status, next))
         policy_cmds = '\n'.join(policy_cmd)
     return policy_cmds
 

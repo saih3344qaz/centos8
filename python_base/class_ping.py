@@ -42,9 +42,10 @@ class Qytping:
 
     def __str__(self):
         if not self.srcip:
-            return '<dstip: {0}, size: {1}>'.format(self.ip, self.length)
+            return '<{0} =>  dstip: {1}, size: {2}>'.format(self.__class__.__name__,self.ip, self.length)
         else:
-            return '<srcip: {0}, dstip: {1}, size: {2}>'.format(self.srcip, self.ip, self.length)
+            return '<{0} =>  srcip: {1} dstip: {2}, size: {3}>'.format(self.__class__.__name__,self.srcip, self.ip,
+                                                                       self.length)
 
 
 class Newping(Qytping):

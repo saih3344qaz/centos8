@@ -28,7 +28,7 @@ def netmiko_config_cred(host, username, password, cmds_list, enable='Cisc0123', 
                     'host': host,
                     'username': username,
                     'password': password,
-                    'device_type': 'cisco_ios' if ssh else 'cisco_ios_telnet',
+                    'device_type': 'cisco_xe' if ssh else 'cisco_ios_telnet',
                     'secret': enable
     }
     try:

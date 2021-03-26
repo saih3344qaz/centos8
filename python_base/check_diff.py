@@ -4,6 +4,7 @@
 from tools.ssh_client_netmiko import netmiko_show_cred
 from tools.compare_diff_conf import diff_txt
 import re
+import hashlib
 import time
 
 
@@ -15,8 +16,13 @@ def get_config(host, username, password):
         split_result = re.split(r'\nhostname \S+[\s\S]+\n', device_config_raw)
         run_config = device_config_raw.replace(split_result[0], '').strip()
         # 获取配置的MD5值
-        md5 = re.findall(r'=\s(\w+)',netmiko_show_cred(host, username, password, 'verify /md5 system:running-config'))
-        md5_value = ''.join(md5)
+        m = hashlib.md5()
+        m.update(run_config.encode())
+        md5_value = m.hexdigest()
+
+        # 获取配置的MD5值
+        # md5 = re.findall(r'=\s(\w+)',netmiko_show_cred(host, username, password, 'verify /md5 system:running-config'))
+        # md5_value = ''.join(md5)
         # 返回ip, 配置, md5值
         return host, run_config, md5_value
     except Exception:
