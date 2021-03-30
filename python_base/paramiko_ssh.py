@@ -3,7 +3,7 @@
 
 import paramiko
 import re
-from test_decorator import write_to_file
+from tools.test_decorator import write_to_file
 
 @write_to_file('test.txt')
 def test_ssh(ip, username, password,port=22, cmd='ls'):
