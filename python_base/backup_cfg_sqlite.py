@@ -2,6 +2,7 @@
 # -*- coding=utf-8 -*-
 
 import sqlite3
+import pg8000
 from ssh_client_netmiko import netmiko_show_cred
 import hashlib
 import re
@@ -10,10 +11,13 @@ import os
 
 def create_configdb():
     conn = sqlite3.connect('configdb.sqlite')
+    # conn = pg8000.connect(host='192.168.128.160', user='postgres', password='postgres@123', database='postgres')
     cursor = conn.cursor()
-    cursor.execute("create table config_md5(ip varchar (40), config varchar (99999), md5_config varchar (999))")
+    cursor.execute("create table config_md5(ip varchar (40), config varchar (99999), md5 varchar (999))")
+    conn.commit()
+    conn.close()
 
-device_list = ['192.168.128.145']
+device_list = ['192.168.128.145','192.168.128.131','192.168.128.144']
 username = 'admin'
 password = 'admin@123'
 
@@ -35,22 +39,24 @@ def get_md5_config(host, username, password):
 
 def wirte_config_md5_to_db():
     conn = sqlite3.connect('configdb.sqlite')
+    # conn = pg8000.connect(host='192.168.128.160', user='postgres', password='postgres@123', database='postgres')
     cursor = conn.cursor()
     for device in device_list:
         config_and_md5 = get_md5_config(device, username, password)
-        cursor.execute("select * from config_md5")
+        cursor.execute("select * from config_md5 where ip =?", (device,))
         md5_results = cursor.fetchall()
         # print(md5_results)
         if not md5_results:
-            cursor.execute("insert into config_md5 values ('%s', '%s', '%s')" % (
-            config_and_md5[0], config_and_md5[1], config_and_md5[2]))
+            cursor.execute("insert into config_md5(ip,config,md5) values (?,?,?)",
+                           (device, config_and_md5[1], config_and_md5[2]))
+
+            conn.commit()
         else:
-            new_md5 = get_md5_config(device, username, password)[2]
-            new_cfg = get_md5_config(device, username, password)[1]
-            if new_md5 != md5_results[0][2]:
-                print(md5_results[0][0],md5_results[0][2])
-                cursor.execute(f"update config_md5 set config ='{new_cfg}' where ip = '{device}'")
-                cursor.execute(f"update config_md5 set md5_config='{new_md5}' where ip = '{device}'")
+            if config_and_md5[2] != md5_results[0][2]:
+                cursor.execute("update config_md5 set config=?,md5=? where ip = ?",
+                               (config_and_md5[1], config_and_md5[2], device))
+
+                conn.commit()
             else:
                 pass
     cursor.execute("select * from config_md5")
