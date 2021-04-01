@@ -7,11 +7,13 @@
 
 import logging
 
+from kamene.layers.inet6 import ICMPv6ND_NS, IPv6
+
 logging.getLogger("kamene.runtime").setLevel(logging.ERROR)  # 清除报错
 from kamene.all import *
 from tools.get_mac_netifaces import get_mac_address
-from tools.ipv6_tools import mac_to_ipv6_linklocal
-from tools.ipv6_tools_kamene import solicited_node_multicast_address
+# from tools.ipv6_tools import mac_to_ipv6_linklocal
+# from tools.ipv6_tools_kamene import solicited_node_multicast_address
 
 # Windows 查看IPv6邻居 netsh int ipv6 show neigh
 # IOS     查看IPv6邻居 show ipv6 neighbors
