@@ -27,5 +27,5 @@ def scapy_arp_scan(network, ifname):
 
 if __name__ == '__main__':
     # Windows Linux均可使用
-    for ip, mac in scapy_arp_scan("10.1.1.0/24", 'ens33').items():
+    for ip, mac in scapy_arp_scan("192.168.128.0/24", 'ens33').items():
         print('ip地址:'+ip+'是活动的,他的MAC地址是:'+mac)

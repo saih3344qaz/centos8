@@ -41,4 +41,4 @@ if __name__ == "__main__":
     # 此代码只能在WIN下运行
     import platform
     if platform.system() == "Windows":
-        print(win_from_name_get_id("Net1"))
+        print(win_from_name_get_id("VMware Network Adapter VMnet8"))

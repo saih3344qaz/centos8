@@ -45,5 +45,5 @@ if __name__ == "__main__":
         print(get_ip_address('ens33'))
         print(get_ipv6_address('ens33'))
     elif platform.system() == "Windows":
-        print(get_ip_address('Net1'))
-        print(get_ipv6_address('Net1'))
+        print(get_ip_address('VMware Network Adapter VMnet8'))
+        print(get_ipv6_address('VMware Network Adapter VMnet8'))

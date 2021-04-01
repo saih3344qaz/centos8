@@ -33,5 +33,5 @@ def dns_query(dns_name):
 
 if __name__ == "__main__":
     # 使用Linux解释器 & WIN解释器
-    dns_query("www.cisco.com")
+    dns_query("adminmall.creditcard.cmbc.com.cn")
 

@@ -42,5 +42,5 @@ if __name__ == '__main__':
     if platform.system() == "Linux":
         print(get_mac_address('ens33'))
     elif platform.system() == "Windows":
-        print(get_mac_address('Net1'))
+        print(get_mac_address('VMware Network Adapter VMnet8'))
 

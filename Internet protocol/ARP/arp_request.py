@@ -5,10 +5,10 @@ import logging
 
 logging.getLogger("kamene.runtime").setLevel(logging.ERROR)  # 清除报错
 from kamene.all import *
-from get_ip_netifaces import get_ip_address  # 获取本机IP地址
-from get_mac_netifaces import get_mac_address  # 获取本机MAC地址
-from scapy_iface import scapy_iface  # 获取scapy iface的名字
-from get_ifname import get_ifname  # 获取接口唯一ID
+# from tools.get_ip_netifaces import get_ip_address  # 获取本机IP地址
+# from tools.get_mac_netifaces import get_mac_address  # 获取本机MAC地址
+# from tools.scapy_iface import scapy_iface  # 获取scapy iface的名字
+# from tools.get_ifname import get_ifname  # 获取接口唯一ID
 
 
 def arp_request(ip_address, ifname='ens33'):
